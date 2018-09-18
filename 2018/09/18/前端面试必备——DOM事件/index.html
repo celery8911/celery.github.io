@@ -79,22 +79,24 @@
 
 
 
-<meta name="description" content="面试题目 DOM事件级别 DOM事件模型 事件流 描述DOM事件捕获的具体流程 Event 对象的常见应用 自定义事件  解答一、DOM事件的级别DOM级别一共可以分为4个级别：DOM0级，DOM1级，DOM2级和 DOM3级。 DOM事件分为3个级别：  DOM0级事件处理 DOM2级事件处理 DOM3级事件处理  如下图所示：![DOM级别.jpeg] 有人可能会问，为什么没有DOM1级事件处">
+<meta name="description" content="面试题目 DOM事件级别 DOM事件模型 事件流 描述DOM事件捕获的具体流程 Event 对象的常见应用 自定义事件  解答一、DOM事件的级别DOM级别一共可以分为4个级别：DOM0级，DOM1级，DOM2级和 DOM3级。 DOM事件分为3个级别：  DOM0级事件处理 DOM2级事件处理 DOM3级事件处理  如下图所示： 有人可能会问，为什么没有DOM1级事件处理呢？因为1级DOM标准中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DOM事件">
 <meta property="og:url" content="http://yoursite.com/2018/09/18/前端面试必备——DOM事件/index.html">
 <meta property="og:site_name" content="芹菜的日进录">
-<meta property="og:description" content="面试题目 DOM事件级别 DOM事件模型 事件流 描述DOM事件捕获的具体流程 Event 对象的常见应用 自定义事件  解答一、DOM事件的级别DOM级别一共可以分为4个级别：DOM0级，DOM1级，DOM2级和 DOM3级。 DOM事件分为3个级别：  DOM0级事件处理 DOM2级事件处理 DOM3级事件处理  如下图所示：![DOM级别.jpeg] 有人可能会问，为什么没有DOM1级事件处">
+<meta property="og:description" content="面试题目 DOM事件级别 DOM事件模型 事件流 描述DOM事件捕获的具体流程 Event 对象的常见应用 自定义事件  解答一、DOM事件的级别DOM级别一共可以分为4个级别：DOM0级，DOM1级，DOM2级和 DOM3级。 DOM事件分为3个级别：  DOM0级事件处理 DOM2级事件处理 DOM3级事件处理  如下图所示： 有人可能会问，为什么没有DOM1级事件处理呢？因为1级DOM标准中">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/09/18/前端面试必备——DOM事件/DOM级别.jpeg">
+<meta property="og:image" content="http://yoursite.com/2018/09/18/前端面试必备——DOM事件/事件模型.jpeg">
 <meta property="og:image" content="evernotecid://0F1D815D-5BF9-41C6-AF68-3489211C4A2F/appyinxiangcom/16560494/ENNote/p1203?hash=19cb3803f91b165dcd5ef56266c6a66b">
 <meta property="og:image" content="evernotecid://0F1D815D-5BF9-41C6-AF68-3489211C4A2F/appyinxiangcom/16560494/ENNote/p1203?hash=474ecbbf3082808b81e7857d917157c5">
 <meta property="og:image" content="evernotecid://0F1D815D-5BF9-41C6-AF68-3489211C4A2F/appyinxiangcom/16560494/ENNote/p1203?hash=a8ffc29762c08c9d404b2773e9b69e8f">
 <meta property="og:image" content="evernotecid://0F1D815D-5BF9-41C6-AF68-3489211C4A2F/appyinxiangcom/16560494/ENNote/p1203?hash=d4175a7ead573ca041164c577d2652a8">
-<meta property="og:updated_time" content="2018-09-18T15:32:23.000Z">
+<meta property="og:updated_time" content="2018-09-18T15:36:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DOM事件">
-<meta name="twitter:description" content="面试题目 DOM事件级别 DOM事件模型 事件流 描述DOM事件捕获的具体流程 Event 对象的常见应用 自定义事件  解答一、DOM事件的级别DOM级别一共可以分为4个级别：DOM0级，DOM1级，DOM2级和 DOM3级。 DOM事件分为3个级别：  DOM0级事件处理 DOM2级事件处理 DOM3级事件处理  如下图所示：![DOM级别.jpeg] 有人可能会问，为什么没有DOM1级事件处">
-<meta name="twitter:image" content="evernotecid://0F1D815D-5BF9-41C6-AF68-3489211C4A2F/appyinxiangcom/16560494/ENNote/p1203?hash=19cb3803f91b165dcd5ef56266c6a66b">
+<meta name="twitter:description" content="面试题目 DOM事件级别 DOM事件模型 事件流 描述DOM事件捕获的具体流程 Event 对象的常见应用 自定义事件  解答一、DOM事件的级别DOM级别一共可以分为4个级别：DOM0级，DOM1级，DOM2级和 DOM3级。 DOM事件分为3个级别：  DOM0级事件处理 DOM2级事件处理 DOM3级事件处理  如下图所示： 有人可能会问，为什么没有DOM1级事件处理呢？因为1级DOM标准中">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/18/前端面试必备——DOM事件/DOM级别.jpeg">
 
 
 
@@ -339,7 +341,7 @@
 <li>DOM2级事件处理</li>
 <li>DOM3级事件处理</li>
 </ul>
-<p>如下图所示：<br>![DOM级别.jpeg]</p>
+<p>如下图所示：<br><img src="/2018/09/18/前端面试必备——DOM事件/DOM级别.jpeg" alt=""></p>
 <p>有人可能会问，为什么没有DOM1级事件处理呢？因为1级DOM标准中并没有定义事件相关的内容，所以没有所谓的1级DOM事件模型。</p>
 <h4 id="1-HTML事件处理程序（HTML-的-on-属性）"><a href="#1-HTML事件处理程序（HTML-的-on-属性）" class="headerlink" title="1.HTML事件处理程序（HTML 的 on- 属性）"></a>1.HTML事件处理程序（HTML 的 on- 属性）</h4><p>在了解DOM0级事件之前，我们有必要先了解下<strong>HTML事件处理程序</strong>，也是最早的这一种的事件处理方式，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;button type=&quot;button&quot; onclick=&quot;showFn()&quot;&gt;&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function showFn() &#123;</span><br><span class="line">        alert(&apos;Hello World&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
 <p>以上代码我们通过直接在HTML代码里定义了一个onclick的属性触发showFn方法。</p>
@@ -387,7 +389,7 @@
 <li>变动事件，当底层DOM结构发生变化时触发，如：DOMsubtreeModified</li>
 </ul>
 <p>同时DOM3级事件也允许使用者<strong>自定义一些事件</strong>。</p>
-<h3 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h3><p>![事件模型.jpeg]</p>
+<h3 id="事件模型"><a href="#事件模型" class="headerlink" title="事件模型"></a>事件模型</h3><p><img src="/2018/09/18/前端面试必备——DOM事件/事件模型.jpeg" alt=""></p>
 <blockquote>
 <p>首先我们思考一个很有意思的事情：一张纸上画了两个同心圆，当我们把手指放到圆心上时，手指指向的不是一个圆，而是纸上的两个圆，同理之，当我们单击网页上的一个div块的时候（代码片段一），单击事件会仅仅作用在这个div上面吗？ 在浏览器发展到第四代时，IE和Netscape的开发团队都遇到这个问题，他们都一致认为，除了单击div块，我们也单击了body、 html、甚至是整个document，但不幸的是两个团队针对事件流模型产生了两个完全相反的概念。</p>
 </blockquote>
