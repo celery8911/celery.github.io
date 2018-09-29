@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="异步操作概述单线程模型单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。 注意，JavaScript 只在一个线程上运行，不代表 JavaScript 引擎只有一个线程。事实上，JavaScript 引擎有多个线程，单个脚本只能在一个线程上运行（称为主线程），其他线程都是在后台配合。 JavaScript">
+<meta name="description" content="单线程模型单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。 注意，JavaScript 只在一个线程上运行，不代表 JavaScript 引擎只有一个线程。事实上，JavaScript 引擎有多个线程，单个脚本只能在一个线程上运行（称为主线程），其他线程都是在后台配合。 JavaScript 之所以采用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS的运行机制">
 <meta property="og:url" content="http://yoursite.com/2018/09/29/JS的运行机制/index.html">
 <meta property="og:site_name" content="芹菜的日进录">
-<meta property="og:description" content="异步操作概述单线程模型单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。 注意，JavaScript 只在一个线程上运行，不代表 JavaScript 引擎只有一个线程。事实上，JavaScript 引擎有多个线程，单个脚本只能在一个线程上运行（称为主线程），其他线程都是在后台配合。 JavaScript">
+<meta property="og:description" content="单线程模型单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。 注意，JavaScript 只在一个线程上运行，不代表 JavaScript 引擎只有一个线程。事实上，JavaScript 引擎有多个线程，单个脚本只能在一个线程上运行（称为主线程），其他线程都是在后台配合。 JavaScript 之所以采用">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-29T06:07:00.000Z">
+<meta property="og:updated_time" content="2018-09-29T06:09:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS的运行机制">
-<meta name="twitter:description" content="异步操作概述单线程模型单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。 注意，JavaScript 只在一个线程上运行，不代表 JavaScript 引擎只有一个线程。事实上，JavaScript 引擎有多个线程，单个脚本只能在一个线程上运行（称为主线程），其他线程都是在后台配合。 JavaScript">
+<meta name="twitter:description" content="单线程模型单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。 注意，JavaScript 只在一个线程上运行，不代表 JavaScript 引擎只有一个线程。事实上，JavaScript 引擎有多个线程，单个脚本只能在一个线程上运行（称为主线程），其他线程都是在后台配合。 JavaScript 之所以采用">
 
 
 
@@ -319,7 +319,7 @@
       
 
       
-        <h1 id="异步操作概述"><a href="#异步操作概述" class="headerlink" title="异步操作概述"></a>异步操作概述</h1><h2 id="单线程模型"><a href="#单线程模型" class="headerlink" title="单线程模型"></a>单线程模型</h2><p>单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。</p>
+        <h2 id="单线程模型"><a href="#单线程模型" class="headerlink" title="单线程模型"></a>单线程模型</h2><p>单线程模型指的是，JavaScript 只在一个线程上运行。也就是说，JavaScript 同时只能执行一个任务，其他任务都必须在后面排队等待。</p>
 <p>注意，JavaScript 只在一个线程上运行，不代表 JavaScript 引擎只有一个线程。事实上，JavaScript 引擎有多个线程，单个脚本只能在一个线程上运行（称为主线程），其他线程都是在后台配合。</p>
 <p>JavaScript 之所以采用单线程，而不是多线程，跟历史有关系。JavaScript 从诞生起就是单线程，原因是不想让浏览器变得太复杂，因为多线程需要共享资源、且有可能修改彼此的运行结果，对于一种网页脚本语言来说，这就太复杂了。如果 JavaScript 同时有两个线程，一个线程在网页 DOM 节点上添加内容，另一个线程删除了这个节点，这时浏览器应该以哪个线程为准？是不是还要有锁机制？所以，为了避免复杂性，JavaScript 一开始就是单线程，这已经成了这门语言的核心特征，将来也不会改变。</p>
 <p>这种模式的好处是实现起来比较简单，执行环境相对单纯；坏处是只要有一个任务耗时很长，后面的任务都必须排队等着，会拖延整个程序的执行。常见的浏览器无响应（假死），往往就是因为某一段 JavaScript 代码长时间运行（比如死循环），导致整个页面卡在这个地方，其他任务无法执行。JavaScript 语言本身并不慢，慢的是读写外部数据，比如等待 Ajax 请求返回结果。这个时候，如果对方服务器迟迟没有响应，或者网络不通畅，就会导致脚本的长时间停滞。</p>
@@ -523,7 +523,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异步操作概述"><span class="nav-number">1.</span> <span class="nav-text">异步操作概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程模型"><span class="nav-number">1.1.</span> <span class="nav-text">单线程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步任务和异步任务"><span class="nav-number">1.2.</span> <span class="nav-text">同步任务和异步任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务队列和事件循环"><span class="nav-number">1.3.</span> <span class="nav-text">任务队列和事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步操作的模式"><span class="nav-number">1.4.</span> <span class="nav-text">异步操作的模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回调函数"><span class="nav-number">1.4.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件监听"><span class="nav-number">1.4.2.</span> <span class="nav-text">事件监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布-订阅"><span class="nav-number">1.4.3.</span> <span class="nav-text">发布/订阅</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步操作的流程控制"><span class="nav-number">1.5.</span> <span class="nav-text">异步操作的流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#串行执行"><span class="nav-number">1.5.1.</span> <span class="nav-text">串行执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行执行"><span class="nav-number">1.5.2.</span> <span class="nav-text">并行执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行与串行的结合"><span class="nav-number">1.5.3.</span> <span class="nav-text">并行与串行的结合</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单线程模型"><span class="nav-number">1.</span> <span class="nav-text">单线程模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步任务和异步任务"><span class="nav-number">2.</span> <span class="nav-text">同步任务和异步任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务队列和事件循环"><span class="nav-number">3.</span> <span class="nav-text">任务队列和事件循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步操作的模式"><span class="nav-number">4.</span> <span class="nav-text">异步操作的模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#回调函数"><span class="nav-number">4.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件监听"><span class="nav-number">4.2.</span> <span class="nav-text">事件监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布-订阅"><span class="nav-number">4.3.</span> <span class="nav-text">发布/订阅</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异步操作的流程控制"><span class="nav-number">5.</span> <span class="nav-text">异步操作的流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#串行执行"><span class="nav-number">5.1.</span> <span class="nav-text">串行执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行执行"><span class="nav-number">5.2.</span> <span class="nav-text">并行执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行与串行的结合"><span class="nav-number">5.3.</span> <span class="nav-text">并行与串行的结合</span></a></li></ol></li></ol></div>
             
 
           </div>
