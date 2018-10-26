@@ -249,6 +249,175 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/26/history对象/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Celery">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="芹菜的日进录">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/26/history对象/" itemprop="url">history对象</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-26T23:52:57+08:00">
+                2018-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>window.history</code>属性指向 History 对象，它表示当前窗口的浏览历史。</p>
+<p>History 对象保存了当前窗口访问过的所有页面网址。下面代码表示当前窗口一共访问过3个网址。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.length <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>由于安全原因，浏览器不允许脚本读取这些地址，但是允许在地址之间导航。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后退到前一个网址</span></span><br><span class="line">history.back()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line">history.go(<span class="number">-1</span>)</span><br></pre></td></tr></table></figure>
+<p>浏览器工具栏的“前进”和“后退”按钮，其实就是对 History 对象进行操作。</p>
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>History 对象主要有两个属性。</p>
+<ul>
+<li><code>History.length</code>：当前窗口访问过的网址数量（包括当前网页）</li>
+<li><code>History.state</code>：History 堆栈最上层的状态值（详见下文）</li>
+</ul>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="History-back-、History-forward-、History-go"><a href="#History-back-、History-forward-、History-go" class="headerlink" title="History.back()、History.forward()、History.go()"></a>History.back()、History.forward()、History.go()</h3><p>这三个方法用于在历史之中移动。</p>
+<ul>
+<li><code>History.back()</code>：移动到上一个网址，等同于点击浏览器的后退键。对于第一个访问的网址，该方法无效果。</li>
+<li><code>History.forward()</code>：移动到下一个网址，等同于点击浏览器的前进键。对于最后一个访问的网址，该方法无效果。</li>
+<li><code>History.go()</code>：接受一个整数作为参数，以当前网址为基准，移动到参数指定的网址，比如<code>go(1)</code>相当于<code>forward()</code>，<code>go(-1)</code>相当于<code>back()</code>。如果参数超过实际存在的网址范围，该方法无效果；如果不指定参数，默认参数为<code>0</code>，相当于刷新当前页面。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">history.back();</span><br><span class="line">history.forward();</span><br><span class="line">history.go(<span class="number">-2</span>);</span><br></pre></td></tr></table></figure>
+<p><code>history.go(0)</code>相当于刷新当前页面。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history.go(<span class="number">0</span>);记录</span><br></pre></td></tr></table></figure>
+<p>注意，移动到以前访问过的页面时，页面通常是从浏览器缓存之中加载，而不是重新要求服务器发送新的网页。</p>
+<h3 id="History-pushState-，"><a href="#History-pushState-，" class="headerlink" title="History.pushState()，"></a>History.pushState()，</h3><p><code>History.pushState()</code>方法用于在历史中添加一条记录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.pushState(state, title, url)</span><br></pre></td></tr></table></figure>
+<p>该方法接受三个参数，依次为：</p>
+<ul>
+<li><code>state</code>：一个与添加的记录相关联的状态对象，主要用于<code>popstate</code>事件。该事件触发时，该对象会传入回调函数。也就是说，浏览器会将这个对象序列化以后保留在本地，重新载入这个页面的时候，可以拿到这个对象。如果不需要这个对象，此处可以填<code>null</code>。</li>
+<li><code>title</code>：新页面的标题。但是，现在所有浏览器都忽视这个参数，所以这里可以填空字符串。</li>
+<li><code>url</code>：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。</li>
+</ul>
+<p>假定当前网址是<code>example.com/1.html</code>，使用<code>pushState()</code>方法在浏览记录（History 对象）中添加一个新记录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stateObj = &#123; <span class="attr">foo</span>: <span class="string">'bar'</span> &#125;;</span><br><span class="line">history.pushState(stateObj, <span class="string">'page 2'</span>, <span class="string">'2.html'</span>);</span><br></pre></td></tr></table></figure>
+<p>添加新记录后，浏览器地址栏立刻显示<code>example.com/2.html</code>，但并不会跳转到<code>2.html</code>，甚至也不会检查<code>2.html</code>是否存在，它只是成为浏览历史中的最新记录。这时，在地址栏输入一个新的地址(比如访问<code>google.com</code>)，然后点击了倒退按钮，页面的 URL 将显示<code>2.html</code>；你再点击一次倒退按钮，URL 将显示<code>1.html</code>。</p>
+<p>总之，<code>pushState()</code>方法不会触发页面刷新，只是导致 History 对象发生变化，地址栏会有反应。</p>
+<p>使用该方法之后，就可以用<code>History.state</code>属性读出状态对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> stateObj = &#123; <span class="attr">foo</span>: <span class="string">'bar'</span> &#125;;</span><br><span class="line">history.pushState(stateObj, <span class="string">'page 2'</span>, <span class="string">'2.html'</span>);</span><br><span class="line">history.state <span class="comment">// &#123;foo: "bar"&#125;</span></span><br></pre></td></tr></table></figure>
+<p>如果<code>pushState</code>的 URL 参数设置了一个新的锚点值（即<code>hash</code>），并不会触发<code>hashchange</code>事件。反过来，如果 URL 的锚点值变了，则会在 History 对象创建一条浏览记录。</p>
+<p>如果<code>pushState()</code>方法设置了一个跨域网址，则会报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 报错</span></span><br><span class="line"><span class="comment">// 当前网址为 http://example.com</span></span><br><span class="line">history.pushState(<span class="literal">null</span>, <span class="string">''</span>, <span class="string">'https://twitter.com/hello'</span>);</span><br></pre></td></tr></table></figure>
+<p>上面代码中，<code>pushState</code>想要插入一个跨域的网址，导致报错。这样设计的目的是，防止恶意代码让用户以为他们是在另一个网站上，因为这个方法不会导致页面跳转。</p>
+<h3 id="History-replaceState"><a href="#History-replaceState" class="headerlink" title="History.replaceState()"></a>History.replaceState()</h3><p><code>History.replaceState()</code>方法用来修改 History 对象的当前记录，其他都与<code>pushState()</code>方法一模一样。</p>
+<p>假定当前网页是<code>example.com/example.html</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">1</span>&#125;, <span class="string">'title 1'</span>, <span class="string">'?page=1'</span>)</span><br><span class="line"><span class="comment">// URL 显示为 http://example.com/example.html?page=1</span></span><br><span class="line"></span><br><span class="line">history.pushState(&#123;<span class="attr">page</span>: <span class="number">2</span>&#125;, <span class="string">'title 2'</span>, <span class="string">'?page=2'</span>);</span><br><span class="line"><span class="comment">// URL 显示为 http://example.com/example.html?page=2</span></span><br><span class="line"></span><br><span class="line">history.replaceState(&#123;<span class="attr">page</span>: <span class="number">3</span>&#125;, <span class="string">'title 3'</span>, <span class="string">'?page=3'</span>);</span><br><span class="line"><span class="comment">// URL 显示为 http://example.com/example.html?page=3</span></span><br><span class="line"></span><br><span class="line">history.back()</span><br><span class="line"><span class="comment">// URL 显示为 http://example.com/example.html?page=1</span></span><br><span class="line"></span><br><span class="line">history.back()</span><br><span class="line"><span class="comment">// URL 显示为 http://example.com/example.html</span></span><br><span class="line"></span><br><span class="line">history.go(<span class="number">2</span>)</span><br><span class="line"><span class="comment">// URL 显示为 http://example.com/example.html?page=3</span></span><br></pre></td></tr></table></figure>
+<h2 id="popstate-事件"><a href="#popstate-事件" class="headerlink" title="popstate 事件"></a>popstate 事件</h2><p>每当同一个文档的浏览历史（即<code>history</code>对象）出现变化时，就会触发<code>popstate</code>事件。</p>
+<p>注意，仅仅调用<code>pushState()</code>方法或<code>replaceState()</code>方法 ，并不会触发该事件，只有用户点击浏览器倒退按钮和前进按钮，或者使用 JavaScript 调用<code>History.back()</code>、<code>History.forward()</code>、<code>History.go()</code>方法时才会触发。另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。</p>
+<p>使用的时候，可以为<code>popstate</code>事件指定回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onpopstate = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'location: '</span> + <span class="built_in">document</span>.location);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'state: '</span> + <span class="built_in">JSON</span>.stringify(event.state));</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'popstate'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'location: '</span> + <span class="built_in">document</span>.location);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'state: '</span> + <span class="built_in">JSON</span>.stringify(event.state));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>回调函数的参数是一个<code>event</code>事件对象，它的<code>state</code>属性指向<code>pushState</code>和<code>replaceState</code>方法为当前 URL 所提供的状态对象（即这两个方法的第一个参数）。上面代码中的<code>event.state</code>，就是通过<code>pushState</code>和<code>replaceState</code>方法，为当前 URL 绑定的<code>state</code>对象。</p>
+<p>这个<code>state</code>对象也可以直接通过<code>history</code>对象读取。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> currentState = history.state;</span><br></pre></td></tr></table></figure>
+<p>注意，页面第一次加载的时候，浏览器不会触发<code>popstate</code>事件。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/01/Promise-对象/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2134,218 +2303,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/22/this-关键字/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Celery">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="芹菜的日进录">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/22/this-关键字/" itemprop="url">this 关键字</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-22T22:52:54+08:00">
-                2018-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="涵义"><a href="#涵义" class="headerlink" title="涵义"></a>涵义</h2><p><code>this</code>关键字是一个非常重要的语法点。毫不夸张地说，不理解它的含义，大部分开发任务都无法完成。</p>
-<p>前一章已经提到，<code>this</code>可以用在构造函数之中，表示实例对象。除此之外，<code>this</code>还可以用在别的场合。但不管是什么场合，<code>this</code>都有一个共同点：它总是返回一个对象。</p>
-<p>简单说，<code>this</code>就是属性或方法“当前”所在的对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.property</span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>this</code>就代表<code>property</code>属性当前所在的对象。</p>
-<p>下面是一个实际的例子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  describe: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'姓名：'</span>+ <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.describe()</span><br><span class="line"><span class="comment">// "姓名：张三"</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>this.name</code>表示<code>name</code>属性所在的那个对象。由于<code>this.name</code>是在<code>describe</code>方法中调用，而<code>describe</code>方法所在的当前对象是<code>person</code>，因此<code>this</code>指向<code>person</code>，<code>this.name</code>就是<code>person.name</code>。</p>
-<p>由于对象的属性可以赋给另一个对象，所以属性所在的当前对象是可变的，即<code>this</code>的指向是可变的。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  describe: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'姓名：'</span>+ <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> B = &#123;</span><br><span class="line">  name: <span class="string">'李四'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">B.describe = A.describe;</span><br><span class="line">B.describe()</span><br><span class="line"><span class="comment">// "姓名：李四"</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>A.describe</code>属性被赋给<code>B</code>，于是<code>B.describe</code>就表示<code>describe</code>方法所在的当前对象是<code>B</code>，所以<code>this.name</code>就指向<code>B.name</code>。</p>
-<p>稍稍重构这个例子，<code>this</code>的动态指向就能看得更清楚。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'姓名：'</span>+ <span class="keyword">this</span>.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> A = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  describe: f</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> B = &#123;</span><br><span class="line">  name: <span class="string">'李四'</span>,</span><br><span class="line">  describe: f</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">A.describe() <span class="comment">// "姓名：张三"</span></span><br><span class="line">B.describe() <span class="comment">// "姓名：李四"</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，函数<code>f</code>内部使用了<code>this</code>关键字，随着<code>f</code>所在的对象不同，<code>this</code>的指向也不同。</p>
-<p>只要函数被赋给另一个变量，<code>this</code>的指向就会变。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> A = &#123;</span><br><span class="line">  name: <span class="string">'张三'</span>,</span><br><span class="line">  describe: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'姓名：'</span>+ <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'李四'</span>;</span><br><span class="line"><span class="keyword">var</span> f = A.describe;</span><br><span class="line">f() <span class="comment">// "姓名：李四"</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>A.describe</code>被赋值给变量<code>f</code>，内部的<code>this</code>就会指向<code>f</code>运行时所在的对象（本例是顶层对象）。</p>
-<p>再看一个网页编程的例子。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"age"</span> <span class="attr">size</span>=<span class="string">3</span> <span class="attr">onChange</span>=<span class="string">"validate(this, 18, 99);"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">validate</span>(<span class="params">obj, lowval, hival</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">if</span> ((obj.value &lt; lowval) || (obj.value &gt; hival))</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">'Invalid Value!'</span>);</span></span><br><span class="line"><span class="undefined">&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>上面代码是一个文本输入框，每当用户输入一个值，就会调用<code>onChange</code>回调函数，验证这个值是否在指定范围。浏览器会向回调函数传入当前对象，因此<code>this</code>就代表传入当前对象（即文本框），然后就可以从<code>this.value</code>上面读到用户的输入值。</p>
-<p>总结一下，JavaScript 语言之中，一切皆对象，运行环境也是对象，所以函数都是在某个对象之中运行，<code>this</code>就是函数运行时所在的对象（环境）。这本来并不会让用户糊涂，但是 JavaScript 支持运行环境动态切换，也就是说，<code>this</code>的指向是动态的，没有办法事先确定到底指向哪个对象，这才是最让初学者感到困惑的地方。</p>
-<h2 id="实质"><a href="#实质" class="headerlink" title="实质"></a>实质</h2><p>JavaScript 语言之所以有 this 的设计，跟内存里面的数据结构有关系。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">foo</span>:  <span class="number">5</span> &#125;;</span><br></pre></td></tr></table></figure>
-<p>上面的代码将一个对象赋值给变量<code>obj</code>。JavaScript 引擎会先在内存里面，生成一个对象<code>{ foo: 5 }</code>，然后把这个对象的内存地址赋值给变量<code>obj</code>。也就是说，变量<code>obj</code>是一个地址（reference）。后面如果要读取<code>obj.foo</code>，引擎先从<code>obj</code>拿到内存地址，然后再从该地址读出原始的对象，返回它的<code>foo</code>属性。</p>
-<p>原始的对象以字典结构保存，每一个属性名都对应一个属性描述对象。举例来说，上面例子的<code>foo</code>属性，实际上是以下面的形式保存的。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  foo: &#123;</span><br><span class="line">    [[value]]: <span class="number">5</span></span><br><span class="line">    [[writable]]: <span class="literal">true</span></span><br><span class="line">    [[enumerable]]: <span class="literal">true</span></span><br><span class="line">    [[configurable]]: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意，<code>foo</code>属性的值保存在属性描述对象的<code>value</code>属性里面。</p>
-<p>这样的结构是很清晰的，问题在于属性的值可能是一个函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">foo</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125; &#125;;</span><br></pre></td></tr></table></figure>
-<p>这时，引擎会将函数单独保存在内存中，然后再将函数的地址赋值给<code>foo</code>属性的<code>value</code>属性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  foo: &#123;</span><br><span class="line">    [[value]]: 函数的地址</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由于函数是一个单独的值，所以它可以在不同的环境（上下文）执行。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">f</span>: f &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单独执行</span></span><br><span class="line">f()</span><br><span class="line"></span><br><span class="line"><span class="comment">// obj 环境执行</span></span><br><span class="line">obj.f()</span><br></pre></td></tr></table></figure>
-<p>JavaScript 允许在函数体内部，引用当前环境的其他变量。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>上面代码中，函数体里面使用了变量<code>x</code>。该变量由运行环境提供。</p>
-<p>现在问题就来了，由于函数可以在不同的运行环境执行，所以需要有一种机制，能够在函数体内部获得当前的运行环境（context）。所以，<code>this</code>就出现了，它的设计目的就是在函数体内部，指代函数当前的运行环境。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面代码中，函数体里面的<code>this.x</code>就是指当前运行环境的<code>x</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  f: f,</span><br><span class="line">  x: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单独执行</span></span><br><span class="line">f() <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// obj 环境执行</span></span><br><span class="line">obj.f() <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，函数<code>f</code>在全局环境执行，<code>this.x</code>指向全局环境的<code>x</code>；在<code>obj</code>环境执行，<code>this.x</code>指向<code>obj.x</code>。</p>
-<h2 id="使用场合"><a href="#使用场合" class="headerlink" title="使用场合"></a>使用场合</h2><p><code>this</code>主要有以下几个使用场合。</p>
-<p><strong>（1）全局环境</strong></p>
-<p>全局环境使用<code>this</code>，它指的就是顶层对象<code>window</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span> === <span class="built_in">window</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="built_in">window</span>);</span><br><span class="line">&#125;</span><br><span class="line">f() <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>上面代码说明，不管是不是在函数内部，只要是在全局环境下运行，<code>this</code>就是指顶层对象<code>window</code>。</p>
-<p><strong>（2）构造函数</strong></p>
-<p>构造函数中的<code>this</code>，指的是实例对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Obj = <span class="function"><span class="keyword">function</span> (<span class="params">p</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.p = p;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>上面代码定义了一个构造函数<code>Obj</code>。由于<code>this</code>指向实例对象，所以在构造函数内部定义<code>this.p</code>，就相当于定义实例对象有一个<code>p</code>属性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> Obj(<span class="string">'Hello World!'</span>);</span><br><span class="line">o.p <span class="comment">// "Hello World!"</span></span><br></pre></td></tr></table></figure>
-<p><strong>（3）对象的方法</strong></p>
-<p>如果对象的方法里面包含<code>this</code>，<code>this</code>的指向就是方法运行时所在的对象。该方法赋值给另一个对象，就会改变<code>this</code>的指向。</p>
-<p>但是，这条规则很不容易把握。请看下面的代码。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj =&#123;</span><br><span class="line">  foo: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj.foo() <span class="comment">// obj</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>obj.foo</code>方法执行时，它内部的<code>this</code>指向<code>obj</code>。</p>
-<p>但是，下面这几种用法，都会改变<code>this</code>的指向。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 情况一</span></span><br><span class="line">(obj.foo = obj.foo)() <span class="comment">// window</span></span><br><span class="line"><span class="comment">// 情况二</span></span><br><span class="line">(<span class="literal">false</span> || obj.foo)() <span class="comment">// window</span></span><br><span class="line"><span class="comment">// 情况三</span></span><br><span class="line">(<span class="number">1</span>, obj.foo)() <span class="comment">// window</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>obj.foo</code>就是一个值。这个值真正调用的时候，运行环境已经不是<code>obj</code>了，而是全局环境，所以<code>this</code>不再指向<code>obj</code>。</p>
-<p>可以这样理解，JavaScript 引擎内部，<code>obj</code>和<code>obj.foo</code>储存在两个内存地址，称为地址一和地址二。<code>obj.foo()</code>这样调用时，是从地址一调用地址二，因此地址二的运行环境是地址一，<code>this</code>指向<code>obj</code>。但是，上面三种情况，都是直接取出地址二进行调用，这样的话，运行环境就是全局环境，因此<code>this</code>指向全局环境。上面三种情况等同于下面的代码。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 情况一</span></span><br><span class="line">(obj.foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;)()</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 情况二</span></span><br><span class="line">(<span class="literal">false</span> || <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 情况三</span></span><br><span class="line">(<span class="number">1</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-<p>如果<code>this</code>所在的方法不在对象的第一层，这时<code>this</code>只是指向当前一层的对象，而不会继承更上面的层。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  p: <span class="string">'Hello'</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    m: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.p);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">a.b.m() <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>a.b.m</code>方法在<code>a</code>对象的第二层，该方法内部的<code>this</code>不是指向<code>a</code>，而是指向<code>a.b</code>，因为实际执行的是下面的代码。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = &#123;</span><br><span class="line">  m: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span>.p);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  p: <span class="string">'Hello'</span>,</span><br><span class="line">  b: b</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">(a.b).m() <span class="comment">// 等同于 b.m()</span></span><br></pre></td></tr></table></figure>
-<p>如果要达到预期效果，只有写成下面这样。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  b: &#123;</span><br><span class="line">    m: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.p);</span><br><span class="line">    &#125;,</span><br><span class="line">    p: <span class="string">'Hello'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>如果这时将嵌套对象内部的方法赋值给一个变量，<code>this</code>依然会指向全局对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;</span><br><span class="line">  b: &#123;</span><br><span class="line">    m: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.p);</span><br><span class="line">    &#125;,</span><br><span class="line">    p: <span class="string">'Hello'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hello = a.b.m;</span><br><span class="line">hello() <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>m</code>是多层对象内部的一个方法。为求简便，将其赋值给<code>hello</code>变量，结果调用时，<code>this</code>指向了顶层对象。为了避免这个问题，可以只将<code>m</code>所在的对象赋值给<code>hello</code>，这样调用时，<code>this</code>的指向就不会变。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hello = a.b;</span><br><span class="line">hello.m() <span class="comment">// Hello</span></span><br></pre></td></tr></table></figure>
-<h2 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h2><h3 id="避免多层-this"><a href="#避免多层-this" class="headerlink" title="避免多层 this"></a>避免多层 this</h3><p>由于<code>this</code>的指向是不确定的，所以切勿在函数中包含多层的<code>this</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  f1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    &#125;();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">o.f1()</span><br><span class="line"><span class="comment">// Object</span></span><br><span class="line"><span class="comment">// Window</span></span><br></pre></td></tr></table></figure>
-<p>上面代码包含两层<code>this</code>，结果运行后，第一层指向对象<code>o</code>，第二层指向全局对象，因为实际执行的是下面的代码。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> temp = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  f1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">var</span> f2 = temp();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>一个解决方法是在第二层改用一个指向外层<code>this</code>的变量。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  f1: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">var</span> f2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(that);</span><br><span class="line">    &#125;();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">o.f1()</span><br><span class="line"><span class="comment">// Object</span></span><br><span class="line"><span class="comment">// Object</span></span><br></pre></td></tr></table></figure>
-<p>上面代码定义了变量<code>that</code>，固定指向外层的<code>this</code>，然后在内层使用<code>that</code>，就不会发生<code>this</code>指向的改变。</p>
-<p>事实上，使用一个变量固定<code>this</code>的值，然后内层函数调用这个变量，是非常常见的做法，请务必掌握。</p>
-<p>JavaScript 提供了严格模式，也可以硬性避免这种问题。严格模式下，如果函数内部的<code>this</code>指向顶层对象，就会报错。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> counter = &#123;</span><br><span class="line">  count: <span class="number">0</span></span><br><span class="line">&#125;;</span><br><span class="line">counter.inc = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">  'use strict'</span>;</span><br><span class="line">  <span class="keyword">this</span>.count++</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> f = counter.inc;</span><br><span class="line">f()</span><br><span class="line"><span class="comment">// TypeError: Cannot read property 'count' of undefined</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>inc</code>方法通过<code>&#39;use strict&#39;</code>声明采用严格模式，这时内部的<code>this</code>一旦指向顶层对象，就会报错。</p>
-<h3 id="避免数组处理方法中的-this"><a href="#避免数组处理方法中的-this" class="headerlink" title="避免数组处理方法中的 this"></a>避免数组处理方法中的 this</h3><p>数组的<code>map</code>和<code>foreach</code>方法，允许提供一个函数作为参数。这个函数内部不应该使用<code>this</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  v: <span class="string">'hello'</span>,</span><br><span class="line">  p: [ <span class="string">'a1'</span>, <span class="string">'a2'</span> ],</span><br><span class="line">  f: <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.p.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.v + <span class="string">' '</span> + item);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">o.f()</span><br><span class="line"><span class="comment">// undefined a1</span></span><br><span class="line"><span class="comment">// undefined a2</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>foreach</code>方法的回调函数中的<code>this</code>，其实是指向<code>window</code>对象，因此取不到<code>o.v</code>的值。原因跟上一段的多层<code>this</code>是一样的，就是内层的<code>this</code>不指向外部，而指向顶层对象。</p>
-<p>解决这个问题的一种方法，就是前面提到的，使用中间变量固定<code>this</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  v: <span class="string">'hello'</span>,</span><br><span class="line">  p: [ <span class="string">'a1'</span>, <span class="string">'a2'</span> ],</span><br><span class="line">  f: <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">this</span>.p.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(that.v+<span class="string">' '</span>+item);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">o.f()</span><br><span class="line"><span class="comment">// hello a1</span></span><br><span class="line"><span class="comment">// hello a2</span></span><br></pre></td></tr></table></figure>
-<p>另一种方法是将<code>this</code>当作<code>foreach</code>方法的第二个参数，固定它的运行环境。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  v: <span class="string">'hello'</span>,</span><br><span class="line">  p: [ <span class="string">'a1'</span>, <span class="string">'a2'</span> ],</span><br><span class="line">  f: <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.p.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.v + <span class="string">' '</span> + item);</span><br><span class="line">    &#125;, <span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">o.f()</span><br><span class="line"><span class="comment">// hello a1</span></span><br><span class="line"><span class="comment">// hello a2</span></span><br></pre></td></tr></table></figure>
-<h3 id="避免回调函数中的-this"><a href="#避免回调函数中的-this" class="headerlink" title="避免回调函数中的 this"></a>避免回调函数中的 this</h3><p>回调函数中的<code>this</code>往往会改变指向，最好避免使用。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">o.f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span> === o);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// jQuery 的写法</span></span><br><span class="line">$(<span class="string">'#button'</span>).on(<span class="string">'click'</span>, o.f);</span><br></pre></td></tr></table></figure>
-<p>上面代码中，点击按钮以后，控制台会显示<code>false</code>。原因是此时<code>this</code>不再指向<code>o</code>对象，而是指向按钮的 DOM 对象，因为<code>f</code>方法是在按钮对象的环境中被调用的。这种细微的差别，很容易在编程中忽视，导致难以察觉的错误。</p>
-<p>为了解决这个问题，可以采用下面的一些方法对<code>this</code>进行绑定，也就是使得<code>this</code>固定指向某个对象，减少不确定性。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2396,7 +2353,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
